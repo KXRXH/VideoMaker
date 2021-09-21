@@ -12,15 +12,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int MODE_TYPE = 0;
-    int ROWS = 0;
 private:
-    QPushButton *MODE_BUTTON;
     QPushButton *BROWSE_BUTTON;
     QPushButton *OK_BUTTON;
     QTableWidget *FILES_TABLE;
-    QStringList *FILES;
-    QString *FILENAME;
 
 private slots:
     void browseBtnEvent();
