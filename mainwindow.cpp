@@ -7,6 +7,9 @@
 #include <QFileInfo>
 #include <iostream>
 #include <fstream>
+#include <QFont>
+#include <cmath>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,18 +37,26 @@ MainWindow::MainWindow(QWidget *parent)
     //QTableWidget with files list setup
     FILES_TABLE = new QTableWidget(this);
     FILES_TABLE->move(10, 10);
-    FILES_TABLE->resize(480, 230);s
+    FILES_TABLE->resize(480, 230);
     FILES_TABLE->setColumnCount(2);
     FILES_TABLE->horizontalHeader()->hide();
     FILES_TABLE->setEditTriggers(QTableWidget::NoEditTriggers);
     FILES_TABLE->setShowGrid(false);
+    QFont fnt = FILES_TABLE->font();
+    fnt.setPointSize(10);
+    FILES_TABLE->setFont(fnt);
+    //Setting resize policy
+    FILES_TABLE->horizontalHeader()->setStretchLastSection(true);
+    FILES_TABLE->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
 }
+
 
 void MainWindow::okBtnEvent()
 {
     QString outFileName = QFileDialog::getSaveFileName(this,
                                             tr("Save file"), "/", tr("Video File (*.mp4)"));
-    if (outFileName)
+    if (outFileName != "")
     {    
         // Creating one big video file from clips (clip's names are insede files.txt)
         std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy %1").arg(outFileName).toStdString();
@@ -55,6 +66,12 @@ void MainWindow::okBtnEvent()
     }
 }
 
+// Round function
+double round_up(double value, int decimal_places)
+{
+    const double multiplier = std::pow(10.0, decimal_places);
+    return std::ceil(value * multiplier) / multiplier;
+}
 
 void MainWindow::browseBtnEvent()
 {
@@ -78,7 +95,7 @@ void MainWindow::browseBtnEvent()
             // Filling table
             QFileInfo fi(path);
             QString FileName = fi.fileName();
-            QString FileSize = QString("%1 Mb").arg(QString::number(fi.size() / pow(1024, 2)));
+            QString FileSize = QString("%1 Mb").arg(QString::number(round_up(fi.size() / pow(1024, 2), 2)));
             
             FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 0, new QTableWidgetItem(FileName));
