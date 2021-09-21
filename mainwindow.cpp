@@ -13,7 +13,7 @@
 
 
 
-QStringList FILES_LIST;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
