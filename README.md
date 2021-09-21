@@ -8,7 +8,6 @@ Create video from your game clips in 3 steps
 >>
 >>--------------------------------------------------
 >>
->>With files:
->> 
+>>With files:  
 >><img src="https://cdn.discordapp.com/attachments/889867107846750281/889869563464912916/unknown.png" width="300" height="200">
 
