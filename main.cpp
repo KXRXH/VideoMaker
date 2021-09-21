@@ -9,10 +9,11 @@
 int main(int argc, char *argv[])
 {
     darktheme dt;
-    MainWindow w;
+    
     QFileInfo fileListInfo("files.txt");
     
     QApplication app(argc, argv);
+    MainWindow w;
     // Dark theme applying 
     app.setStyle(QStyleFactory::create("Fusion"));
     app.setPalette(dt.getDarkTheme());
