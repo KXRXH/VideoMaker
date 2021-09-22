@@ -1,20 +1,14 @@
 #include "mainwindow.h"
 #include "darktheme.h"
-#include <QtWidgets>
-#include <QCoreApplication>
-#include <QFileDialog>
-#include <QTableWidgetItem>
-#include <QFileInfo>
-#include <iostream>
-#include <fstream>
-#include <QFont>
-#include <cmath>
+#include "functions.h"
+
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     darktheme dt;
+
     //MainWindow setup
     this->setFixedSize(500, 300);
 
@@ -38,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     FILES_TABLE = new QTableWidget(this);
     FILES_TABLE->move(10, 10);
     FILES_TABLE->resize(480, 230);
-    FILES_TABLE->setColumnCount(2);
+    FILES_TABLE->setColumnCount(3);
     FILES_TABLE->horizontalHeader()->hide();
     FILES_TABLE->setEditTriggers(QTableWidget::NoEditTriggers);
     FILES_TABLE->setShowGrid(false);
@@ -59,18 +53,11 @@ void MainWindow::okBtnEvent()
     if (outFileName != "")
     {    
         // Creating one big video file from clips (clip's names are insede files.txt)
-        std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy %1").arg(outFileName).toStdString();
+        const std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy %1").arg(outFileName).toStdString();
         WinExec(cmd.c_str(), SW_HIDE);
         // Clearing QTableWidget
         FILES_TABLE->setRowCount(0);
     }
-}
-
-// Round function
-double round_up(double value, int decimal_places)
-{
-    const double multiplier = std::pow(10.0, decimal_places);
-    return std::ceil(value * multiplier) / multiplier;
 }
 
 void MainWindow::browseBtnEvent()
@@ -92,14 +79,22 @@ void MainWindow::browseBtnEvent()
         }
         for (auto& path : FILES)
         {
+            functions fn;
             // Filling table
             QFileInfo fi(path);
             QString FileName = fi.fileName();
-            QString FileSize = QString("%1 Mb").arg(QString::number(round_up(fi.size() / pow(1024, 2), 2)));
-            
+            QString FileSize = QString("%1 Mb").arg(QString::number(fn.round_up(fi.size() / pow(1024, 2), 2)));
+            std::string cmd = QString("ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 \"%1\"").arg(path).toStdString();
+            int FileDurationSec = round(fn.exec(cmd.c_str()));
+            std::string seconds = fn.to_format(FileDurationSec % 60);
+            int minutes = FileDurationSec / 60;
+            std::string hours = fn.to_format(minutes / 60);
+            std::string minutesStr = fn.to_format(FileDurationSec / 60);
+            QString FILE_DURAION = QString("%1:%2:%3").arg(QString::fromUtf8(hours), QString::fromUtf8(minutesStr), QString::fromUtf8(seconds));
             FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 0, new QTableWidgetItem(FileName));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 1, new QTableWidgetItem(FileSize));
+            FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 2, new QTableWidgetItem(FILE_DURAION));
             
             // Writing paths to file
             outfile << "file '" << path.toStdString() << "'\n";
