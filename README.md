@@ -13,4 +13,4 @@
 >><img src="https://cdn.discordapp.com/attachments/889867107846750281/889869563464912916/unknown.png" width="300" height="200">
   
 🐍[Python version of app](https://github.com/KXRXH/VideoMaker "Slower, but has more features")
-
+P.S. To build a project you need ffmpeg and ffprobe 
