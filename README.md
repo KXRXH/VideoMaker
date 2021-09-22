@@ -14,4 +14,4 @@
   
 🐍[Python version of app](https://github.com/KXRXH/VideoMaker "Slower, but has more features")
 <br>
-P.S. To build the project you need ffmpeg and ffprobe 
+P.S. To build the project you need [ffmpeg and ffprobe](https://ffmpeg.org/download.html)
