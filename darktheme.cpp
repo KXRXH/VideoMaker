@@ -1,5 +1,5 @@
 #include "darktheme.h"
-#include <QPalette>
+
 QPalette darktheme::getDarkTheme()
 {
     // Setting colors

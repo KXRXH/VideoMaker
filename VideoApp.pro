@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     darktheme.cpp \
+    functions.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     darktheme.h \
+    functions.h \
     mainwindow.h
 
 # Default rules for deployment.

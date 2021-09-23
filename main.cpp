@@ -5,6 +5,8 @@
 #include <darktheme.h>
 #include <fstream>
 #include <QFileInfo>
+#include <QDebug>
+
 
 int main(int argc, char *argv[])
 {

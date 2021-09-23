@@ -4,6 +4,15 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QTableWidget>
+#include <QtWidgets>
+#include <QCoreApplication>
+#include <QFileDialog>
+#include <QTableWidgetItem>
+#include <QFileInfo>
+#include <string>
+#include <fstream>
+#include <QFont>
+#include <cmath>
 
 class MainWindow : public QMainWindow
 {
