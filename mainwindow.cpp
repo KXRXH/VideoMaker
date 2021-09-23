@@ -53,10 +53,13 @@ void MainWindow::okBtnEvent()
     if (outFileName != "")
     {    
         // Creating one big video file from clips (clip's names are insede files.txt)
-        const std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy %1").arg(outFileName).toStdString();
-        WinExec(cmd.c_str(), SW_HIDE);
+        const std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy \"%1\"").arg(outFileName).toStdString();
+        system(cmd.c_str());
         // Clearing QTableWidget
         FILES_TABLE->setRowCount(0);
+        std::ofstream ofs;
+        ofs.open("files.txt", std::ofstream::trunc);
+        ofs.close();
     }
 }
 
@@ -97,7 +100,10 @@ void MainWindow::browseBtnEvent()
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 2, new QTableWidgetItem(FILE_DURAION));
             
             // Writing paths to file
-            outfile << "file '" << path.toStdString() << "'\n";
+            std::string pathToFile= fn.ReplaceAll(path.toStdString(), std::string("'"), std::string("'\\''"));
+            //QString f = QString("'%1''").arg("\\");
+            //qDebug() << f;
+            outfile << "file '" << pathToFile << "'\n";
         }
         outfile.close();
     }
