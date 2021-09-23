@@ -28,7 +28,7 @@ QString functions::exec(const QString execf)//, const QStringList params)
     return process.readAllStandardOutput();
 }
 */
-// format number for format: "02"
+// formating number for "nn" format
 std::string functions::to_format(const int number) {
     std::stringstream ss;
     ss << std::setw(2) << std::setfill('0') << number;
