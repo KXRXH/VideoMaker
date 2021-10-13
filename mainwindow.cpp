@@ -1,14 +1,10 @@
 #include "mainwindow.h"
-#include "darktheme.h"
-#include "functions.h"
 
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    darktheme dt;
-
     //MainWindow setup
     this->setFixedSize(500, 300);
 
@@ -42,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     //Setting resize policy
     FILES_TABLE->horizontalHeader()->setStretchLastSection(true);
     FILES_TABLE->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-
 }
 
 
@@ -82,27 +77,32 @@ void MainWindow::browseBtnEvent()
         }
         for (auto& path : FILES)
         {
-            functions fn;
             // Filling table
             QFileInfo fi(path);
             QString FileName = fi.fileName();
             QString FileSize = QString("%1 Mb").arg(QString::number(fn.round_up(fi.size() / pow(1024, 2), 2)));
+            /*
             std::string cmd = QString("ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 \"%1\"").arg(path).toStdString();
             int FileDurationSec = round(fn.exec(cmd.c_str()));
+            */
+            FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
+            std::string surl = path.toStdString();
+            char* url = new char[surl.length() + 1];
+            url = getDur(url);
+            double fFileDurationSec = QString::fromLocal8Bit(url).toDouble();
+            delete[] url;
+            int FileDurationSec = (int) fFileDurationSec;
             std::string seconds = fn.to_format(FileDurationSec % 60);
             int minutes = FileDurationSec / 60;
             std::string hours = fn.to_format(minutes / 60);
             std::string minutesStr = fn.to_format(FileDurationSec / 60);
-            QString FILE_DURAION = QString("%1:%2:%3").arg(QString::fromUtf8(hours), QString::fromUtf8(minutesStr), QString::fromUtf8(seconds));
-            FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
+            QString FILE_DURATION = QString("%1:%2:%3").arg(QString::fromUtf8(hours), QString::fromUtf8(minutesStr), QString::fromUtf8(seconds));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 0, new QTableWidgetItem(FileName));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 1, new QTableWidgetItem(FileSize));
-            FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 2, new QTableWidgetItem(FILE_DURAION));
+            FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 2, new QTableWidgetItem(FILE_DURATION));
             
             // Writing paths to file
             std::string pathToFile= fn.ReplaceAll(path.toStdString(), std::string("'"), std::string("'\\''"));
-            //QString f = QString("'%1''").arg("\\");
-            //qDebug() << f;
             outfile << "file '" << pathToFile << "'\n";
         }
         outfile.close();

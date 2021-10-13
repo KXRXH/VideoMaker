@@ -17,7 +17,12 @@ SOURCES += \
 HEADERS += \
     darktheme.h \
     functions.h \
-    mainwindow.h
+    mainwindow.h \
+    mylib.h \
+
+LIBS += "./mylib.a"
+
+RC_FILE = myapp.rc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -13,6 +13,12 @@
 #include <fstream>
 #include <QFont>
 #include <cmath>
+#include "functions.h"
+#include "darktheme.h"
+#include "mylib.h"
+
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -25,6 +31,8 @@ private:
     QPushButton *BROWSE_BUTTON;
     QPushButton *OK_BUTTON;
     QTableWidget *FILES_TABLE;
+    functions fn;
+    darktheme dt;
 
 private slots:
     void browseBtnEvent();
