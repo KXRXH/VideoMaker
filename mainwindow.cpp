@@ -13,14 +13,14 @@ MainWindow::MainWindow(QWidget *parent)
     BROWSE_BUTTON->move(10, 250);
     BROWSE_BUTTON->resize(235, 40);
     BROWSE_BUTTON->setToolTip("Browse video file");
-    BROWSE_BUTTON->setStyleSheet(dt.QButtonSheet);
+    //BROWSE_BUTTON->setStyleSheet(dt.QButtonSheet);
     connect(BROWSE_BUTTON, SIGNAL(clicked()), this, SLOT(browseBtnEvent()), Qt::UniqueConnection);
 
     //"OK" BUTTON setup
     OK_BUTTON = new QPushButton("Ok", this);
     OK_BUTTON->setToolTip("Create a video");
     OK_BUTTON->move(255, 250);
-    OK_BUTTON->setStyleSheet(dt.QButtonSheet);
+    //OK_BUTTON->setStyleSheet(dt.QButtonSheet);
     OK_BUTTON->resize(235, 40);
     connect(OK_BUTTON, SIGNAL(clicked()), this, SLOT(okBtnEvent()), Qt::UniqueConnection);
 
@@ -87,10 +87,10 @@ void MainWindow::browseBtnEvent()
             */
             FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
             std::string surl = path.toStdString();
-            char* url = new char[surl.length() + 1];
-            url = getDur(url);
+            const char *cstr = surl.c_str();
+            auto url= getDur((char*)cstr);
             double fFileDurationSec = QString::fromLocal8Bit(url).toDouble();
-            delete[] url;
+            // delete[] cstr;
             int FileDurationSec = (int) fFileDurationSec;
             std::string seconds = fn.to_format(FileDurationSec % 60);
             int minutes = FileDurationSec / 60;

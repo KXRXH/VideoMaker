@@ -20,8 +20,8 @@ QPalette darktheme::getDarkTheme()
     DARK_PALETTE.setColor(QPalette::Button, darkGray);
     DARK_PALETTE.setColor(QPalette::ButtonText, Qt::white);
     DARK_PALETTE.setColor(QPalette::Link, blue);
-    DARK_PALETTE.setColor(QPalette::Highlight, blue);
-    DARK_PALETTE.setColor(QPalette::HighlightedText, Qt::black);
+    DARK_PALETTE.setColor(QPalette::Highlight, black);
+    DARK_PALETTE.setColor(QPalette::HighlightedText, Qt::white);
     DARK_PALETTE.setColor(QPalette::Active, QPalette::Button, gray.darker());
     DARK_PALETTE.setColor(QPalette::Disabled, QPalette::ButtonText, gray);
     DARK_PALETTE.setColor(QPalette::Disabled, QPalette::WindowText, gray);

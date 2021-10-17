@@ -15,7 +15,7 @@
 #include <cmath>
 #include "functions.h"
 #include "darktheme.h"
-#include "mylib.h"
+#include "durlib.h"
 
 
 
