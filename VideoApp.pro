@@ -18,9 +18,9 @@ HEADERS += \
     darktheme.h \
     functions.h \
     mainwindow.h \
-    mylib.h \
+    durlib.h \
 
-LIBS += "./mylib.a"
+LIBS += PATH_TO_THE_FOLDER + "/durlib.a"
 
 RC_FILE = myapp.rc
 
