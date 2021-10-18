@@ -12,6 +12,10 @@
 #include <string>
 #include <fstream>
 #include <QFont>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+#include <random>
 #include <cmath>
 #include "functions.h"
 #include "darktheme.h"

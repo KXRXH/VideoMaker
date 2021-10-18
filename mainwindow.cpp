@@ -2,6 +2,7 @@
 
 
 
+std::vector<std::string> _filesVector;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -48,22 +49,8 @@ void MainWindow::okBtnEvent()
     if (outFileName != "")
     {    
         // Creating one big video file from clips (clip's names are insede files.txt)
-        const std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy \"%1\"").arg(outFileName).toStdString();
-        system(cmd.c_str());
-        // Clearing QTableWidget
-        FILES_TABLE->setRowCount(0);
-        std::ofstream ofs;
-        ofs.open("files.txt", std::ofstream::trunc);
-        ofs.close();
-    }
-}
-
-void MainWindow::browseBtnEvent()
-{
-    QStringList FILES = QFileDialog::getOpenFileNames(this,
-                                            tr("Choose video files"), "/", tr("Video File (*.mp4)"));
-    if (FILES.size())
-    {
+        auto rng = std::default_random_engine {};
+        std::shuffle(std::begin(_filesVector), std::end(_filesVector), rng); // random shuffle
         QFileInfo fileListInfo("files.txt");
         std::ofstream outfile;
         //Checking does file exists
@@ -75,22 +62,40 @@ void MainWindow::browseBtnEvent()
         else {
             outfile.open("files.txt"); // Creating new file
         }
+        for (auto& data : _filesVector)
+        {
+           outfile << data;
+        }
+        outfile.close();
+        const std::string cmd = QString("ffmpeg -safe 0 -f concat -i files.txt -c copy \"%1\"").arg(outFileName).toStdString();
+        system(cmd.c_str());
+        // Clearing QTableWidget
+        FILES_TABLE->setRowCount(0);
+        std::ofstream ofs;
+        ofs.open("files.txt", std::ofstream::trunc);
+        ofs.close();
+        _filesVector.clear();
+    }
+}
+
+void MainWindow::browseBtnEvent()
+{
+    QStringList FILES = QFileDialog::getOpenFileNames(this,
+                                            tr("Choose video files"), "/", tr("Video File (*.mp4)"));
+    if (FILES.size())
+    {
         for (auto& path : FILES)
         {
             // Filling table
             QFileInfo fi(path);
             QString FileName = fi.fileName();
             QString FileSize = QString("%1 Mb").arg(QString::number(fn.round_up(fi.size() / pow(1024, 2), 2)));
-            /*
-            std::string cmd = QString("ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 \"%1\"").arg(path).toStdString();
-            int FileDurationSec = round(fn.exec(cmd.c_str()));
-            */
             FILES_TABLE->setRowCount(FILES_TABLE->rowCount() + 1);
             std::string surl = path.toStdString();
             const char *cstr = surl.c_str();
-            auto url= getDur((char*)cstr);
+            char* url= getDur((char*)cstr);
+            free(url);
             double fFileDurationSec = QString::fromLocal8Bit(url).toDouble();
-            // delete[] cstr;
             int FileDurationSec = (int) fFileDurationSec;
             std::string seconds = fn.to_format(FileDurationSec % 60);
             int minutes = FileDurationSec / 60;
@@ -103,9 +108,10 @@ void MainWindow::browseBtnEvent()
             
             // Writing paths to file
             std::string pathToFile= fn.ReplaceAll(path.toStdString(), std::string("'"), std::string("'\\''"));
-            outfile << "file '" << pathToFile << "'\n";
+            std::stringstream ss;
+            ss << "file '" << pathToFile << "'\n";
+            _filesVector.push_back(ss.str());
         }
-        outfile.close();
     }
 }
 MainWindow::~MainWindow(){}
