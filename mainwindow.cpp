@@ -14,14 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     BROWSE_BUTTON->move(10, 250);
     BROWSE_BUTTON->resize(235, 40);
     BROWSE_BUTTON->setToolTip("Browse video file");
-    //BROWSE_BUTTON->setStyleSheet(dt.QButtonSheet);
     connect(BROWSE_BUTTON, SIGNAL(clicked()), this, SLOT(browseBtnEvent()), Qt::UniqueConnection);
 
     //"OK" BUTTON setup
     OK_BUTTON = new QPushButton("Ok", this);
     OK_BUTTON->setToolTip("Create a video");
     OK_BUTTON->move(255, 250);
-    //OK_BUTTON->setStyleSheet(dt.QButtonSheet);
     OK_BUTTON->resize(235, 40);
     connect(OK_BUTTON, SIGNAL(clicked()), this, SLOT(okBtnEvent()), Qt::UniqueConnection);
 
