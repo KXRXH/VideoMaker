@@ -19,6 +19,7 @@ HEADERS += \
     mainwindow.h \
     durlib.h \
 
+
 LIBS += "D:/Programs/C++/VideoApp/lib/durlib.a"
 
 
