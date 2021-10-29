@@ -15,3 +15,4 @@
 🐍[Python (PyQt5) version of app](https://github.com/KXRXH/VideoMaker "Slower, but has more features")
 <br>
 👉P.S. To build the project you need [ffmpeg and ffprobe](https://ffmpeg.org/download.html)
+[![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
