@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iomanip>
 
-// format number to format: "2" -> "02"
+// format number like: "2" -> "02"
 std::string to_format(const int number)
 {
     std::stringstream ss;
