@@ -20,7 +20,7 @@ HEADERS += \
     durlib.h \
     
     
-LIBS += "D:/Programs/C++/VideoApp/lib/durlib.a"
+LIBS += "PATH_TO_FOLDER/lib/durlib.a"
 
 
 RC_FILE = myapp.rc
