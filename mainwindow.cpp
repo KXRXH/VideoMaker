@@ -8,19 +8,9 @@ struct Duration
     int sec;
     int min;
     int hour;
-    std::string strsec()
-    {
-       return to_format(sec);
-    }
-    std::string strmin()
-    {
-       return to_format(min);
-    }
-    std::string strhour()
-    {
-       return to_format(hour);
-    }
-
+    std::string strsec() return to_format(sec);
+    std::string strmin() return to_format(min);
+    std::string strhour() return to_format(hour);
 };
 std::vector<std::string> _filesVector;
 Duration GENERAL_DURATION = {0, 0, 0};
@@ -124,10 +114,12 @@ void MainWindow::browseBtnEvent()
             GENERAL_DURATION.min += FDURATION->min;
             GENERAL_DURATION.hour += FDURATION->hour;
             timeFormat(GENERAL_DURATION);
-            QString FILE_DURATION = QString("%1:%2:%3").arg(QString::fromUtf8(FDURATION->strhour()), QString::fromUtf8(FDURATION->strmin()),
+            QString FILE_DURATION = QString("%1:%2:%3").arg(QString::fromUtf8(FDURATION->strhour()),
+                                                            QString::fromUtf8(FDURATION->strmin()),
                                                             QString::fromUtf8(FDURATION->strsec()));
-            FILES_DURATIONS->setText(QString("Out file duration: %1:%2:%3").arg(QString::fromUtf8(GENERAL_DURATION.strhour()), QString::fromUtf8(GENERAL_DURATION.strmin()),
-                                                      QString::fromUtf8(GENERAL_DURATION.strsec())));
+            FILES_DURATIONS->setText(QString("Out file duration: %1:%2:%3").arg(QString::fromUtf8(GENERAL_DURATION.strhour()),
+                                                                                QString::fromUtf8(GENERAL_DURATION.strmin()),
+                                                                                QString::fromUtf8(GENERAL_DURATION.strsec())));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 0, new QTableWidgetItem(FileName));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 1, new QTableWidgetItem(FileSize));
             FILES_TABLE->setItem(FILES_TABLE->rowCount() - 1, 2, new QTableWidgetItem(FILE_DURATION));
