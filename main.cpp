@@ -5,7 +5,6 @@
 #include <darktheme.h>
 #include <fstream>
 #include <QFileInfo>
-#include <QDebug>
 
 
 int main(int argc, char *argv[])
@@ -14,19 +13,14 @@ int main(int argc, char *argv[])
     QFileInfo fileListInfo("files.txt");
     
     QApplication app(argc, argv);
-    MainWindow w;
+    MainWindow window;
     // Dark theme applying 
     app.setStyle(QStyleFactory::create("Fusion"));
     app.setPalette(dt.getDarkTheme());
     app.setStyleSheet(dt.QToolTipSheet);
 
-    // Checking does files.txt exists and clearing it.
-    if (fileListInfo.exists() && fileListInfo.isFile())
-    {
-        std::ofstream ofs;
-        ofs.open("files.txt", std::ofstream::trunc);
-        ofs.close();
-    }
-    w.show();
+    // Checking does files.txt exists then deleting it.
+    if (fileListInfo.exists() && fileListInfo.isFile()) std::remove("files.tmp");
+    window.show();
     return app.exec();
 }

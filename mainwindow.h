@@ -17,11 +17,8 @@
 #include <vector>
 #include <random>
 #include <cmath>
-#include "functions.h"
-#include "darktheme.h"
-#include "durlib.h"
-
-
+#include <ctime>
+#include <QLabel>
 
 
 class MainWindow : public QMainWindow
@@ -35,8 +32,7 @@ private:
     QPushButton *BROWSE_BUTTON;
     QPushButton *OK_BUTTON;
     QTableWidget *FILES_TABLE;
-    functions fn;
-    darktheme dt;
+    QLabel *FILES_DURATIONS;
 
 private slots:
     void browseBtnEvent();

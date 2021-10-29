@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     darktheme.cpp \
-    functions.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -20,7 +19,8 @@ HEADERS += \
     mainwindow.h \
     durlib.h \
 
-LIBS += PATH_TO_THE_FOLDER + "/durlib.a"
+LIBS += "D:/Programs/C++/VideoApp/lib/durlib.a"
+
 
 RC_FILE = myapp.rc
 
