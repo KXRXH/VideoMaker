@@ -14,6 +14,9 @@
   
 [![qt](https://img.shields.io/badge/Made%20with-Qt-112aa.svg)](https://www.qt.io/)
 <br>
+Other version: <br>
+[![pyqt](https://img.shields.io/badge/Made%20with-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker)
+<br>
 👉P.S. To build the project you need [ffmpeg and ffprobe](https://ffmpeg.org/download.html)
 <br>
 [![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
