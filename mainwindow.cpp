@@ -39,6 +39,13 @@ MainWindow::MainWindow(QWidget *parent)
     OK_BUTTON->resize(235, 40);
     connect(OK_BUTTON, SIGNAL(clicked()), this, SLOT(okBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
+    //"RESET" BUTTON setup.
+    RESET_BUTTON = new QPushButton("Reset", this);
+    RESET_BUTTON->setToolTip("Clear files table");
+    RESET_BUTTON->move(390, 245);
+    RESET_BUTTON->resize(100, 20);
+    connect(RESET_BUTTON, SIGNAL(clicked()), this, SLOT(resetBtnEvent()), Qt::UniqueConnection);
+//-------------------------------------------------------------------------------------------------------//
     //QTableWidget with files list setup.
     FILES_TABLE = new QTableWidget(this);
     FILES_TABLE->move(10, 10);
@@ -99,6 +106,24 @@ void MainWindow::okBtnEvent()
 
         _filesVector.clear();
     }
+}
+
+//-------------------------------------------------------------------------------------------------------//
+
+void MainWindow::resetBtnEvent()
+{
+    // Clearing QTableWidget
+    QAbstractItemModel* const table_model = FILES_TABLE->model();
+    table_model->removeRows(0, table_model->rowCount());
+
+    // Removing .tmp file with files names.
+    std::remove("files.tmp");
+    GENERAL_DURATION = {0, 0, 0};
+
+    // General duration zeroing
+    FILES_DURATIONS->setText("Out file duration: 00:00:00");
+
+    _filesVector.clear();
 }
 
 //-------------------------------------------------------------------------------------------------------//

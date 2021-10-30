@@ -17,7 +17,7 @@ void getVideoDuration(char* filename, int& duration)
     avformat_close_input(&pFormatCtx);
     //-------------------------------------------------------------------------------------------------------//
     // Memory cleaning.
-    delete pFormatCtx;
+    av_free(pFormatCtx);
 }
 
 #endif // FILEDURATION_H
