@@ -5,12 +5,12 @@
 >3. Save new video file.
 >> 
 >**Empty:**  
->><img src="https://media.discordapp.net/attachments/889867107846750281/889867219016773673/unknown.png" width="300" height="200">
+>><img src="https://media.discordapp.net/attachments/889867107846750281/904027421144129608/unknown.png" width="300" height="200">
 >>
 >>----------
 >>
 >**With files:**  
->><img src="https://cdn.discordapp.com/attachments/889867107846750281/889869563464912916/unknown.png" width="300" height="200">
+>><img src="https://media.discordapp.net/attachments/889867107846750281/904027740502622239/unknown.png" width="300" height="200">
   
 🐍[Python (PyQt5) version of app](https://github.com/KXRXH/VideoMaker "Slower, but has more features")
 <br>
