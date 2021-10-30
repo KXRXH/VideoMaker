@@ -12,8 +12,7 @@
 >**With files:**  
 >><img src="https://media.discordapp.net/attachments/889867107846750281/904027740502622239/unknown.png" width="300" height="200">
   
-![qt](https://img.shields.io/badge/Made%20with-Qt-112aa.svg)  
-[![pth](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/KXRXH/VideoMaker)
+[![qt](https://img.shields.io/badge/Made%20with-Qt-112aa.svg)](https://www.qt.io/)
 <br>
 👉P.S. To build the project you need [ffmpeg and ffprobe](https://ffmpeg.org/download.html)
 <br>
