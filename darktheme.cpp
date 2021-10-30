@@ -7,7 +7,7 @@ QPalette darktheme::getDarkTheme()
     const QColor gray(128, 128, 128);
     const QColor black(25, 25, 25);
     const QColor blue(42, 130, 218);
-
+    //-------------------------------------------------------------------------------------------------------//
     // Setting a dark theme
     QPalette DARK_PALETTE;
     DARK_PALETTE.setColor(QPalette::Window, darkGray);

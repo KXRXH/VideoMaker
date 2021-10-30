@@ -15,15 +15,17 @@ SOURCES += \
 
 HEADERS += \
     darktheme.h \
+    fileduration.h \
     functions.h \
-    mainwindow.h \
-    durlib.h \
-    
-    
-LIBS += "PATH_TO_FOLDER/lib/durlib.a"
+    mainwindow.h \    
+
+FOLDER_PATH = ...                        # Example: D:/Programs/C++/VideoApp
+INCLUDEPATH += $${FOLDER_PATH}/lib/libav/include
+LIBS += -L$${FOLDER_PATH}/lib/libav/lib
+LIBS += -lavcodec -lavfilter -lavformat -lavutil -lswscale
 
 
-RC_FILE = myapp.rc
+RC_FILE = $${FOLDER_PATH}\src\myapp.rc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
