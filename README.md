@@ -14,7 +14,6 @@
 <br>
 👉P.S. To build the project you need [ffmpeg and ffprobe](https://ffmpeg.org/download.html)
 <br>
-[![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
-<br>
 [![pyqt](https://img.shields.io/badge/Other%20version%20on-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker)
-
+<br>
+[![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
