@@ -4,8 +4,7 @@
 >2. 💾Save file.
 >3. ⏳Wait few seconds.
 <br>
-Screens of verison: **1.4** <br>
-
+>Screens of verison: **1.4**
 >**Empty:**  
 >><img src="https://media.discordapp.net/attachments/889867107846750281/904027421144129608/unknown.png" width="300" height="200">
 >>
