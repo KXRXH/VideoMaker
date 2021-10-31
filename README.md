@@ -16,6 +16,7 @@ Screens of verison: 1.4
 <br>
 [![pyqt](https://img.shields.io/badge/Other%20version%20on-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker)
 <br>
+
 👉P.S. To build the project you need [ffmpeg](https://ffmpeg.org/download.html)
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
