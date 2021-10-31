@@ -34,11 +34,13 @@ private:
     QTableWidget *FILES_TABLE;
     QLabel *FILES_DURATIONS;
     QPushButton *RESET_BUTTON;
+    QPushButton *MODE_BUTTON;
 
 private slots:
     void browseBtnEvent();
     void okBtnEvent();
     void resetBtnEvent();
+    void modeBtnEvent();
 
 };
 #endif // MAINWINDOW_H

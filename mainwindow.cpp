@@ -15,10 +15,9 @@ struct Duration
     std::string strhour() const { return to_format(hour); }
 };
 
-std::vector<std::string> _filesVector; // Creating std::vector<std::string> for randomizing order of loaded videos by randomizing files names.
-
+std::vector<std::string> _FilesVector; // Creating std::vector<std::string> for randomizing order of loaded videos by randomizing files names.
 Duration GENERAL_DURATION = {0, 0, 0}; // Creating struct for getting sum of all video durations.
-
+static bool _Order_Mode = 0; // 0: Sraight oder; 1: Random order.
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -42,9 +41,16 @@ MainWindow::MainWindow(QWidget *parent)
     //"RESET" BUTTON setup.
     RESET_BUTTON = new QPushButton("Reset", this);
     RESET_BUTTON->setToolTip("Clear files table");
-    RESET_BUTTON->move(390, 245);
-    RESET_BUTTON->resize(100, 20);
+    RESET_BUTTON->move(375, 245);
+    RESET_BUTTON->resize(115, 20);
     connect(RESET_BUTTON, SIGNAL(clicked()), this, SLOT(resetBtnEvent()), Qt::UniqueConnection);
+//-------------------------------------------------------------------------------------------------------//
+    //"MODE" BUTTON setup.
+    MODE_BUTTON = new QPushButton("Straight order", this);
+    MODE_BUTTON->setToolTip("Change order mode (Current mode is <<Staright Mode>>)");
+    MODE_BUTTON->move(255, 245);
+    MODE_BUTTON->resize(115, 20);
+    connect(MODE_BUTTON, SIGNAL(clicked()), this, SLOT(modeBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
     //QTableWidget with files list setup.
     FILES_TABLE = new QTableWidget(this);
@@ -80,12 +86,15 @@ void MainWindow::okBtnEvent()
                                             tr("Save file"), "/", tr("Video File (*.mp4)"));
     if (!outFileName.isEmpty())
     {    
-        auto rng = std::mt19937(std::time(nullptr)); // Creating generator.
-        std::shuffle(std::begin(_filesVector), std::end(_filesVector), rng); // Randomizing order of videos.
+        if (_Order_Mode) // If _Order_Mode == 1 (Random order) then:
+        {
+            auto rng = std::mt19937(std::time(nullptr)); // Creating generator.
+            std::shuffle(std::begin(_FilesVector), std::end(_FilesVector), rng); // Randomizing order of videos.
+        }
 
         std::ofstream outfile;
         outfile.open("files.tmp");
-        for (auto&& data : _filesVector) outfile << data;
+        for (auto&& data : _FilesVector) outfile << data;
         outfile.close();
 
         // Creating video by running FFPROBE from cmd.
@@ -104,7 +113,7 @@ void MainWindow::okBtnEvent()
         // General duration zeroing
         FILES_DURATIONS->setText("Out file duration: 00:00:00");
 
-        _filesVector.clear();
+        _FilesVector.clear();
     }
 }
 
@@ -123,7 +132,25 @@ void MainWindow::resetBtnEvent()
     // General duration zeroing
     FILES_DURATIONS->setText("Out file duration: 00:00:00");
 
-    _filesVector.clear();
+    _FilesVector.clear();
+}
+
+//-------------------------------------------------------------------------------------------------------//
+
+void MainWindow::modeBtnEvent()
+{
+    if (_Order_Mode)
+    {
+        _Order_Mode = 0;
+        MODE_BUTTON->setText("Straight order");
+        MODE_BUTTON->setToolTip("Change order mode (Current mode is <<Staright Mode>>)");
+    }
+    else
+    {
+        _Order_Mode = 1;
+        MODE_BUTTON->setText("Random order");
+        MODE_BUTTON->setToolTip("Change order mode (Current mode is <<Random Mode>>)");
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------//
@@ -140,7 +167,7 @@ void MainWindow::browseBtnEvent()
             std::string pathToFile= ReplaceAll(path.toStdString(), std::string("'"), std::string("'\\''"));
             std::stringstream ss;
             ss << "file '" << pathToFile << "'\n";
-            _filesVector.push_back(ss.str());
+            _FilesVector.push_back(ss.str());
             //-------------------------------------------------------------------------------------------------------//
             // Getting file size.
             QFileInfo fi(path);
