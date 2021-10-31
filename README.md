@@ -19,6 +19,6 @@ Screens of verison: 1.4
 [![pyqt](https://img.shields.io/badge/Other%20version%20on-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker)
 <br>
 
-👉**Build:** To build the project you need [libav](https://github.com/KXRXH/VideoMaker_Cpp/blob/main/lib/libav/readme.txt) library
+🛠️**Build:** To build the project you need [libav](https://github.com/KXRXH/VideoMaker_Cpp/blob/main/lib/libav/readme.txt) library
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/KXRXH/VideoMaker_Cpp?branch=main)](https://bettercodehub.com/)
