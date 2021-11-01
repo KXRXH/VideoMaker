@@ -26,7 +26,7 @@ LIBS += -L$${FOLDER_PATH}/lib/libav/lib
 LIBS += -lavcodec -lavfilter -lavformat -lavutil -lswscale
 
 RC_FILE = $${FOLDER_PATH}\src\myapp.rc
-
+    
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
