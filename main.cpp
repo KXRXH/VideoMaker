@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     darktheme dt;
-    QFileInfo fileListInfo("files.txt");
+    QFileInfo fileListInfo("files.tmp");
     //-------------------------------------------------------------------------------------------------------//
     QApplication app(argc, argv);
     MainWindow window;

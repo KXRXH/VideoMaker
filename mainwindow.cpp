@@ -5,9 +5,9 @@
 
 struct Duration
 {
-    int sec;
-    int min;
-    int hour;
+    int sec = 0;
+    int min = 0;
+    int hour = 0;
     //-------------------------------------------------------------------------------------------------------//
     // Initializing fucntions for formating nums to format of <00:00:00>
     std::string strsec() const { return to_format(sec); }
@@ -15,14 +15,15 @@ struct Duration
     std::string strhour() const { return to_format(hour); }
 };
 
-std::vector<std::string> _FilesVector; // Creating std::vector<std::string> for randomizing order of loaded videos by randomizing files names.
-Duration GENERAL_DURATION = {0, 0, 0}; // Creating struct for getting sum of all video durations.
+std::vector<std::string> _FilesVector; // Creating std::vector<std::string> for randomizing order of loaded videos by randomizing file names.
+Duration GENERAL_DURATION; // Creating a structure for getting sum of all video durations.
 static bool _Order_Mode = 0; // 0: Sraight oder; 1: Random order.
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    //MainWindow setup
+    // MainWindow setup
     this->setFixedSize(500, 320);
+    this->setWindowTitle("VideoMaker [v1.42]");
 //-------------------------------------------------------------------------------------------------------//
     //"BROWSE" BUTTON setup.
     BROWSE_BUTTON = new QPushButton("Browse", this);
@@ -31,28 +32,28 @@ MainWindow::MainWindow(QWidget *parent)
     BROWSE_BUTTON->setToolTip("Browse video file");
     connect(BROWSE_BUTTON, SIGNAL(clicked()), this, SLOT(browseBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
-    //"OK" BUTTON setup.
+    // "OK" BUTTON setup.
     OK_BUTTON = new QPushButton("Ok", this);
     OK_BUTTON->setToolTip("Create a video");
     OK_BUTTON->move(255, 270);
     OK_BUTTON->resize(235, 40);
     connect(OK_BUTTON, SIGNAL(clicked()), this, SLOT(okBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
-    //"RESET" BUTTON setup.
+    // "RESET" BUTTON setup.
     RESET_BUTTON = new QPushButton("Reset", this);
     RESET_BUTTON->setToolTip("Clear files table");
     RESET_BUTTON->move(375, 245);
     RESET_BUTTON->resize(115, 20);
     connect(RESET_BUTTON, SIGNAL(clicked()), this, SLOT(resetBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
-    //"MODE" BUTTON setup.
+    // "MODE" BUTTON setup.
     MODE_BUTTON = new QPushButton("Straight order", this);
     MODE_BUTTON->setToolTip("Change order mode (Current mode is <<Staright Mode>>)");
     MODE_BUTTON->move(255, 245);
     MODE_BUTTON->resize(115, 20);
     connect(MODE_BUTTON, SIGNAL(clicked()), this, SLOT(modeBtnEvent()), Qt::UniqueConnection);
 //-------------------------------------------------------------------------------------------------------//
-    //QTableWidget with files list setup.
+    // QTableWidget with files list setup.
     FILES_TABLE = new QTableWidget(this);
     FILES_TABLE->move(10, 10);
     FILES_TABLE->resize(480, 230);
@@ -60,11 +61,11 @@ MainWindow::MainWindow(QWidget *parent)
     FILES_TABLE->horizontalHeader()->hide();
     FILES_TABLE->setEditTriggers(QTableWidget::NoEditTriggers);
     FILES_TABLE->setShowGrid(false);
-    // Changeing font size.
+    // Changing font size.
     QFont fnt = FILES_TABLE->font();
     fnt.setPointSize(10);
     FILES_TABLE->setFont(fnt);
-    //Setting resize policy.
+    // Setting resize policy.
     FILES_TABLE->horizontalHeader()->setStretchLastSection(true);
     FILES_TABLE->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 //-------------------------------------------------------------------------------------------------------//
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     FILES_DURATIONS->move(10, 230);
     FILES_DURATIONS->resize(200, 50);
     FILES_DURATIONS->setText("Out file duration: 00:00:00");
-    // Changeing font size.
+    // Changing font size.
     fnt.setPointSize(12);
     FILES_DURATIONS->setFont(fnt);
 }
@@ -129,7 +130,7 @@ void MainWindow::resetBtnEvent()
     std::remove("files.tmp");
     GENERAL_DURATION = {0, 0, 0};
 
-    // General duration zeroing
+    // General duration
     FILES_DURATIONS->setText("Out file duration: 00:00:00");
 
     _FilesVector.clear();
@@ -165,9 +166,9 @@ void MainWindow::browseBtnEvent()
         {
             // Writing paths to file.
             std::string pathToFile= ReplaceAll(path.toStdString(), std::string("'"), std::string("'\\''"));
-            std::stringstream ss;
-            ss << "file '" << pathToFile << "'\n";
-            _FilesVector.push_back(ss.str());
+            std::string ss = "";
+            ss += "file '";ss += pathToFile;ss += "'\n";
+            _FilesVector.push_back(ss);
             //-------------------------------------------------------------------------------------------------------//
             // Getting file size.
             QFileInfo fi(path);
@@ -176,7 +177,7 @@ void MainWindow::browseBtnEvent()
             //-------------------------------------------------------------------------------------------------------//
             // Getting video file duration.
             int FileDurationSec;
-            getVideoDuration((char*)path.toStdString().c_str(), FileDurationSec); // calling cgo lib [char* getDur(char* url)]
+            getVideoDuration((char*)path.toStdString().c_str(), FileDurationSec); // Getting video duration.
             Duration * FDURATION = new Duration {FileDurationSec % 60, FileDurationSec / 60, FileDurationSec / 360};
             GENERAL_DURATION.sec += FDURATION->sec;
             GENERAL_DURATION.min += FDURATION->min;

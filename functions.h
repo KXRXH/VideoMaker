@@ -36,11 +36,11 @@ std::string ReplaceAll(std::string str, const std::string& from, const std::stri
 //-------------------------------------------------------------------------------------------------------//
 // Formating time
 template<typename T>
-void timeFormat(T& strct)
+void timeFormat(T& structure)
 {
-    strct.min += strct.sec / 60;
-    strct.sec %= 60;
+    structure.min += structure.sec / 60;
+    structure.sec %= 60;
 //--------------------------------//
-    strct.hour += strct.min / 60;
-    strct.min %= 60;
+    structure.hour += structure.min / 60;
+    structure.min %= 60;
 }
