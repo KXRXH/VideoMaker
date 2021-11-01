@@ -1,5 +1,5 @@
 # Video Maker (VideoApp)
-💙Create video from your game clips in 3 steps💙
+💙Create video from your short videos in 3 steps💙
 >1. 🔍Browse files.
 >2. 💾Save file.
 >3. ⏳Wait few seconds.
