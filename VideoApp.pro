@@ -18,7 +18,7 @@ HEADERS += \
     fileduration.h \
     functions.h \
     mainwindow.h \
-
+    
 FOLDER_PATH = ...                        # Example: D:/Programs/C++/VideoApp
 INCLUDEPATH += $${FOLDER_PATH}/lib/libav/include
 
