@@ -17,13 +17,13 @@ HEADERS += \
     darktheme.h \
     fileduration.h \
     functions.h \
-    mainwindow.h \    
+    mainwindow.h \
 
 FOLDER_PATH = ...                        # Example: D:/Programs/C++/VideoApp
 INCLUDEPATH += $${FOLDER_PATH}/lib/libav/include
+
 LIBS += -L$${FOLDER_PATH}/lib/libav/lib
 LIBS += -lavcodec -lavfilter -lavformat -lavutil -lswscale
-
 
 RC_FILE = $${FOLDER_PATH}\src\myapp.rc
 
