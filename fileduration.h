@@ -13,7 +13,7 @@ void getVideoDuration(char* filename, int& duration)
     AVFormatContext* pFormatCtx = avformat_alloc_context();
     avformat_open_input(&pFormatCtx, filename, NULL, NULL);
     avformat_find_stream_info(pFormatCtx,NULL);
-    duration = (int)pFormatCtx->duration / 1000000; // Getting duration and transfer it from microseconds to seconds.
+    duration = (int)pFormatCtx->duration / 1000000; // Getting duration and transfer it from fractional seconds to seconds.
     avformat_close_input(&pFormatCtx);
     //-------------------------------------------------------------------------------------------------------//
     // Memory cleaning.
