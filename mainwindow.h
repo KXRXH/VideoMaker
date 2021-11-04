@@ -1,46 +1,44 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCoreApplication>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFont>
+#include <QLabel>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QTableWidget>
-#include <QtWidgets>
-#include <QCoreApplication>
-#include <QFileDialog>
 #include <QTableWidgetItem>
-#include <QFileInfo>
-#include <string>
-#include <fstream>
-#include <QFont>
-#include <sstream>
+#include <QtWidgets>
 #include <algorithm>
-#include <vector>
-#include <random>
 #include <cmath>
 #include <ctime>
-#include <QLabel>
+#include <fstream>
+#include <random>
+#include <sstream>
+#include <string>
+#include <vector>
 
-
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+  MainWindow(QWidget *parent = nullptr);
+  ~MainWindow();
+
 private:
-    QPushButton *BROWSE_BUTTON;
-    QPushButton *OK_BUTTON;
-    QTableWidget *FILES_TABLE;
-    QLabel *FILES_DURATIONS;
-    QPushButton *RESET_BUTTON;
-    QPushButton *MODE_BUTTON;
+  QPushButton *BROWSE_BUTTON;
+  QPushButton *OK_BUTTON;
+  QTableWidget *FILES_TABLE;
+  QLabel *FILES_DURATIONS;
+  QPushButton *RESET_BUTTON;
+  QPushButton *MODE_BUTTON;
 
 private slots:
-    void browseBtnEvent();
-    void okBtnEvent();
-    void resetBtnEvent();
-    void modeBtnEvent();
-
+  void browseBtnEvent();
+  void okBtnEvent();
+  void resetBtnEvent();
+  void modeBtnEvent();
 };
 #endif // MAINWINDOW_H
