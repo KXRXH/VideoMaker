@@ -12,7 +12,7 @@
  * @param number
  * @return std::string
  */
-std::string to_format(const int number) {
+inline std::string to_format(const int number) {
   char ch[3];
   if (number < 10) {
     std::sprintf(ch, "0%d", number);
@@ -30,7 +30,7 @@ std::string to_format(const int number) {
  * @param decimal_places 
  * @return double 
  */
-double round_up(double value, const int decimal_places) {
+inline double round_up(double value, const int decimal_places) {
   const double multiplier = std::pow(10.0, decimal_places);
   return std::ceil(value * multiplier) / multiplier;
 }
@@ -43,7 +43,7 @@ double round_up(double value, const int decimal_places) {
  * @param to 
  * @return std::string 
  */
-std::string ReplaceAll(std::string str, const std::string &from,
+inline std::string ReplaceAll(std::string str, const std::string &from,
                        const std::string &to) {
   size_t start_pos = 0;
   while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
