@@ -15,7 +15,7 @@ Screens of verison: 1.4
 
 <br>
 
-[![pyqt](https://img.shields.io/badge/Other%20version%20on-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker)
+[![pyqt](https://img.shields.io/badge/Other%20version%20on-PyQt5-112aa.svg)](https://github.com/KXRXH/VideoMaker-PyQt)
 <br>
 
 🛠️**Build:** To build the project by yourself you need [libav](https://github.com/KXRXH/VideoMaker_Cpp/blob/main/lib/libav/readme.txt) library
