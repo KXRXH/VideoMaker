@@ -1,44 +1,44 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QCoreApplication>
-#include <QFileDialog>
-#include <QFileInfo>
-#include <QFont>
-#include <QLabel>
 #include <QMainWindow>
-#include <QPushButton>
-#include <QTableWidget>
-#include <QTableWidgetItem>
-#include <QtWidgets>
-#include <algorithm>
-#include <cmath>
-#include <ctime>
-#include <fstream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
+#include <QLabel>
+#include <QString>
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QSqlRelationalTableModel>
+#include <QTableView>
+#include "databaselib.h"
 
-class MainWindow : public QMainWindow {
-  Q_OBJECT
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
 public:
-  MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
+    QSqlRelationalTableModel  *table;
+    DataBaseLib *dbl;
+
+    QString currentTable = "users";
+    int currentTableIndex = 0;
+    QComboBox *comboBox;
+    void openTable();
+
+    void setupTable();
+public slots:
+    void changeTable(int index);
+    void addRow();
+    void accetpAll();
 private:
-  QPushButton *BROWSE_BUTTON;
-  QPushButton *OK_BUTTON;
-  QTableWidget *FILES_TABLE;
-  QLabel *FILES_DURATIONS;
-  QPushButton *RESET_BUTTON;
-  QPushButton *MODE_BUTTON;
-
-private slots:
-  void browseBtnEvent();
-  void okBtnEvent();
-  void resetBtnEvent();
-  void modeBtnEvent();
+    std::vector<QString> tables_en;
+    std::vector<QString> tables_ru;
+    bool exists = false;
+    Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
